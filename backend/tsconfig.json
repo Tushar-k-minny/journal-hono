@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
+    "strictNullChecks": true,
+    "moduleResolution": "bundler",
+    "module": "Preserve",
+    "resolvePackageJsonImports": true,
+    "rootDir": ".",
+    "outDir": "./dist"
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
