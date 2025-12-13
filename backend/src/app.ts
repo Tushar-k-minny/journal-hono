@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { env } from "./env";
 import configureOpenAPI from "./lib/configure-open-api-app";
 import createApp from "./lib/create-app";
+import healthRouter from "./modules/health";
 
 const testApp = new Hono();
 const api = createApp();
@@ -12,7 +13,7 @@ testApp.get("/", (c) => {
 	return c.json({ message: "hello world", environmnet: env.NODE_ENV });
 });
 
-api.get("/api", (c) => c.text("Hello from API"));
+api.get("/api", healthRouter);
 testApp.route("/", api);
 // testApp.route("/", app);
 
