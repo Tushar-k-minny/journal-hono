@@ -1,6 +1,6 @@
-import createApp from "./lib/create-app";
+import { Hono } from "hono";
 
-const testApp = createApp();
+const testApp = new Hono();
 
 testApp.get("/", (c) => c.text(process.versions.bun));
 
