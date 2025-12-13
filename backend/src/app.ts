@@ -13,7 +13,7 @@ testApp.get("/", (c) => {
 	return c.json({ message: "hello world", environmnet: env.NODE_ENV });
 });
 
-api.get("/api", healthRouter);
+api.route("/api", healthRouter);
 testApp.route("/", api);
 // testApp.route("/", app);
 
