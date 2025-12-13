@@ -7,7 +7,6 @@ import configureOpenAPI from "./lib/configure-open-api-app";
 import createApp from "./lib/create-app";
 import authRouter from "./modules/auth/index.auth";
 import healthRouter from "./modules/health";
-import { logger } from "./utils/logger";
 
 const app = new Hono();
 
@@ -19,7 +18,7 @@ app.use(requestId());
 app.use(
 	"*",
 	pinoLogger({
-		pino: logger,
+		pino: { level: env.LOG_LEVEL ?? "info" },
 	})
 );
 
