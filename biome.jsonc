@@ -1,7 +1,15 @@
 {
-  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": [
-    "ultracite/core",
-    "ultracite/next"
-  ]
+     "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+     "root": true,
+     "extends": [
+          "ultracite/core",
+          "ultracite/next"
+     ],
+     "linter": {
+          "rules": {
+               "performance": {
+                    "noBarrelFile": "info"
+               }
+          }
+     }
 }
