@@ -5,12 +5,11 @@ import { pinoLogger } from "hono-pino";
 import { env } from "./env";
 import configureOpenAPI from "./lib/configure-open-api-app";
 import createApp from "./lib/create-app";
-import type { AppBindings } from "./lib/types";
 import authRouter from "./modules/auth/index.auth";
 import healthRouter from "./modules/health";
 import { logger } from "./utils/logger";
 
-const app = new Hono<AppBindings>();
+const app = new Hono();
 
 const api = createApp();
 configureOpenAPI(api);
@@ -40,9 +39,7 @@ const port = Number(env.PORT ?? 5000);
 
 logger.info({ port }, "auth service listening");
 
-// export default {
-// 	port,
-// 	fetch: app.fetch,
-// };
-
-export default app;
+export default {
+	port,
+	fetch: app.fetch,
+};
