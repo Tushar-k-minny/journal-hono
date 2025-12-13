@@ -1,12 +1,12 @@
 {
      "name": "backend",
      "type": "module",
-     "main": "./dist/index.js",
+     "main": "./dist/app.js",
      "version": "1.0.0",
      "scripts": {
-          "dev": "bun run --hot src/index.ts",
-          "build": "bun build src/index.ts --outdir dist --target bun --format esm --minify  && tsc-alias -p tsconfig.json",
-          "start": "bun run dist/index.js",
+          "dev": "bun run --hot src/app.ts",
+          "build": "bun build src/app.ts --outdir dist --target bun --format esm --minify  && tsc-alias -p tsconfig.json",
+          "start": "bun run dist/app.js",
           "lint": "bunx biome check",
           "format": "bunx biome check --write",
           "check-types": "tsc --noEmit",
