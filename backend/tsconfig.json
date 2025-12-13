@@ -4,7 +4,7 @@
                "ESNext"
           ],
           "target": "ESNext",
-          "module": "Preserve",
+          "module": "ESNext",
           "moduleDetection": "force",
           "jsx": "react-jsx",
           "jsxImportSource": "hono/jsx",
