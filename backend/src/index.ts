@@ -40,7 +40,9 @@ const port = Number(env.PORT ?? 5000);
 
 logger.info({ port }, "auth service listening");
 
-export default {
-	port,
-	fetch: app.fetch,
-};
+// export default {
+// 	port,
+// 	fetch: app.fetch,
+// };
+
+export default app;
