@@ -9,4 +9,7 @@ testApp.get("/", (c) => {
 });
 // testApp.route("/", app);
 
-export default testApp;
+export default {
+	port: env.PORT,
+	fetch: testApp.fetch,
+};
