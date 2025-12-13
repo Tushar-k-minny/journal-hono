@@ -1,7 +1,7 @@
 import { Hono } from "hono";
+import { logger } from "hono/logger";
 import { prettyJSON } from "hono/pretty-json";
 import { requestId } from "hono/request-id";
-import { pinoLogger } from "hono-pino";
 import { env } from "./env";
 import configureOpenAPI from "./lib/configure-open-api-app";
 import createApp from "./lib/create-app";
@@ -15,19 +15,11 @@ configureOpenAPI(api);
 
 app.use(requestId());
 
-app.use(
-	"*",
-	pinoLogger({
-		pino: { level: env.LOG_LEVEL ?? "info" },
-	})
-);
+app.use(logger());
 
 app.use("*", prettyJSON());
 
-app.get("/", (c) => {
-	// logger.error("hello");
-	return c.text("Hello Hono!");
-});
+app.get("/", (c) => c.text("Hello Hono!"));
 
 const routes = [healthRouter, authRouter] as const;
 
@@ -37,7 +29,7 @@ for (const route of routes) {
 app.route("/", api);
 const port = Number(env.PORT ?? 5000);
 
-// logger.info({ port }, "auth service listening");
+console.log(`auth service listening on port ${port}`);
 
 export default {
 	port,
