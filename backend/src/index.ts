@@ -1,11 +1,13 @@
 import { Hono } from "hono";
 import { prettyJSON } from "hono/pretty-json";
 import { requestId } from "hono/request-id";
+import { pinoLogger } from "hono-pino";
 import { env } from "./env";
 import configureOpenAPI from "./lib/configure-open-api-app";
 import createApp from "./lib/create-app";
 import authRouter from "./modules/auth/index.auth";
 import healthRouter from "./modules/health";
+import { logger } from "./utils/logger";
 
 const app = new Hono();
 
@@ -14,12 +16,12 @@ configureOpenAPI(api);
 
 app.use(requestId());
 
-// app.use(
-// 	"*",
-// 	pinoLogger({
-// 		pino: logger,
-// 	})
-// );
+app.use(
+	"*",
+	pinoLogger({
+		pino: logger,
+	})
+);
 
 app.use("*", prettyJSON());
 
