@@ -4,7 +4,7 @@
      "version": "1.0.0",
      "scripts": {
           "dev": "bun run --hot src/index.ts",
-          "build": "bun build src/index.ts --outdir dist --target bun --format esm && tsc-alias",
+          "build": "bun build src/index.ts --outdir dist --target bun --format esm && tsc-alias -p tsconfig.json",
           "start": "bun run dist/index.js",
           "lint": "bunx biome check",
           "format": "bunx biome check --write",
