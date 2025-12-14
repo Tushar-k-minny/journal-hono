@@ -14,6 +14,7 @@ import {
 	createJournalEntryInput,
 	journalEntrySchema,
 	journalSearchQuerySchema,
+	paginatedJournalEntrySchema,
 	updateJournalEntryInput,
 } from "../../../../common/types/index.types";
 
@@ -28,7 +29,7 @@ export const getAllEntries = createRoute({
 		query: journalSearchQuerySchema,
 	},
 	responses: {
-		[HTTPSCODE.OK]: jsonContent(z.array(journalEntrySchema), "Get all Entries"),
+		[HTTPSCODE.OK]: jsonContent(paginatedJournalEntrySchema, "Get all Entries"),
 		[HTTPSCODE.NOT_FOUND]: jsonContent(
 			createMessageObjectSchema("No Entries found"),
 			"No Entries found"

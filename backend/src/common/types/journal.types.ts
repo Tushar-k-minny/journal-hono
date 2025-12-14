@@ -39,6 +39,7 @@ export const createJournalEntryInput = journalEntrySchema
 		createdAt: true,
 		updatedAt: true,
 		metadata: true,
+		userId: true,
 	})
 	.extend({
 		title: z.string().max(180).nullable().optional(),
@@ -47,7 +48,7 @@ export const createJournalEntryInput = journalEntrySchema
 	});
 
 export const updateJournalEntryInput = createJournalEntryInput
-	.omit({ userId: true, metadata: true })
+	.omit({ metadata: true })
 	.extend({ metadata: journalMetadataSchema.optional() })
 	.partial();
 
@@ -102,3 +103,11 @@ export type UpdateJournalEntryInput = z.infer<typeof updateJournalEntryInput>;
 export type MoodSummary = z.infer<typeof moodSummarySchema>;
 export type JournalSearchQuery = z.infer<typeof journalSearchQuerySchema>;
 export type Streak = z.infer<typeof streakSchema>;
+
+export const paginatedJournalEntrySchema = z.object({
+	data: z.array(journalEntrySchema),
+	nextCursor: z.string().nullable().optional(),
+	hasMore: z.boolean(),
+});
+
+export type PaginatedJournalEntry = z.infer<typeof paginatedJournalEntrySchema>;

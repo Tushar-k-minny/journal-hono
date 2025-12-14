@@ -8,6 +8,7 @@ import {
 	gte,
 	ilike,
 	lte,
+	ne,
 } from "drizzle-orm";
 import db from "../../common/database";
 import {
@@ -73,19 +74,57 @@ export const journalRepository = {
 	},
 
 	async search(userId: string, query: JournalSearchQuery) {
-		const where = buildSearchWhere(userId, query);
+		const whereClause = buildSearchWhere(userId, query);
+		const limit = (query.limit ?? 20) + 1;
+
+		const conditions = [whereClause];
+
+		if (query.cursor) {
+			const [cursorEntry] = await db
+				.select({ createdAt: journalEntries.createdAt })
+				.from(journalEntries)
+				.where(
+					and(
+						eq(journalEntries.id, query.cursor),
+						eq(journalEntries.userId, userId)
+					)
+				);
+
+			if (cursorEntry) {
+				const op =
+					query.sort === "asc"
+						? gte(journalEntries.createdAt, cursorEntry.createdAt)
+						: lte(journalEntries.createdAt, cursorEntry.createdAt);
+				conditions.push(op);
+				// We also need to exclude the cursor itself to avoid duplicates if timestamps are exact,
+				// or use (createdAt, id) tuple comparison.
+				// For simplicity here, we might just assume unique timestamps or accept slight overlap risk for now,
+				// BUT better to exclude the exact ID too.
+				conditions.push(ne(journalEntries.id, query.cursor));
+			}
+		}
 
 		const orderBy =
 			query.sort === "asc"
 				? asc(journalEntries.createdAt)
 				: desc(journalEntries.createdAt);
 
-		return await db
+		const rows = await db
 			.select()
 			.from(journalEntries)
-			.where(where)
+			.where(and(...conditions))
 			.orderBy(orderBy)
-			.limit(query.limit ?? 20);
+			.limit(limit);
+
+		const hasMore = rows.length >= limit;
+		const data = hasMore ? rows.slice(0, limit - 1) : rows;
+		const nextCursor = data.length > 0 ? (data.at(-1)?.id ?? null) : null;
+
+		return {
+			data,
+			nextCursor,
+			hasMore,
+		};
 	},
 
 	async create(userId: string, payload: CreateJournalEntryInput) {
