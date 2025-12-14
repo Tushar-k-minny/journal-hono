@@ -15,7 +15,7 @@ import {
 	userSchema,
 } from "../../common/types/index.types";
 
-const tags = ["auth"];
+const tags = ["Auth"];
 
 export const register = createRoute({
 	path: "/register",
@@ -94,7 +94,7 @@ export const logout = createRoute({
 export const profile = createRoute({
 	path: "/profile",
 	method: "get",
-	tags: ["profile"],
+	tags: ["Profile"],
 	middleware: [requireAuth],
 	responses: {
 		[HTTPCODES.OK]: jsonContent(
@@ -115,7 +115,7 @@ export const profile = createRoute({
 export const updateProfile = createRoute({
 	path: "/profile",
 	method: "patch",
-	tags: ["profile"],
+	tags: ["Profile"],
 	middleware: [requireAuth],
 	request: {
 		body: jsonContentRequired(updateProfileInput, "Update user profile"),
