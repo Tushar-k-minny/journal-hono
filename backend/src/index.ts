@@ -7,6 +7,7 @@ import configureOpenAPI from "./lib/configure-open-api-app";
 import createApp from "./lib/create-app";
 import authRouter from "./modules/auth/index.auth";
 import healthRouter from "./modules/health";
+import journalApp from "./modules/journal/index.journal";
 
 const app = new Hono();
 
@@ -21,7 +22,7 @@ app.use("*", prettyJSON());
 
 app.get("/", (c) => c.text("Hello Hono!"));
 
-const routes = [healthRouter, authRouter] as const;
+const routes = [healthRouter, authRouter, journalApp] as const;
 
 for (const route of routes) {
 	api.route("/", route);
