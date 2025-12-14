@@ -76,8 +76,12 @@ export const journalService = {
 	},
 
 	async search(userId: string, query: JournalSearchQuery) {
-		const rows = await journalRepository.search(userId, query);
-		return rows.map(toDto);
+		const result = await journalRepository.search(userId, query);
+		return {
+			data: result.data.map(toDto),
+			nextCursor: result.nextCursor,
+			hasMore: result.hasMore,
+		};
 	},
 
 	async create(userId: string, payload: CreateJournalEntryInput) {
