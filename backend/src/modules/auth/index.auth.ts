@@ -1,8 +1,8 @@
-//biome-ignore lint/performance/noNamespaceImport : needed
-import * as routes from "@auth/routes.auth";
 import { createRouter } from "../../lib/create-app";
 //biome-ignore lint/performance/noNamespaceImport : needed
 import * as controllers from "./handlers.auth";
+//biome-ignore lint/performance/noNamespaceImport : needed
+import * as routes from "./routes.auth";
 
 const authRouter = createRouter()
 	.basePath("/auth")

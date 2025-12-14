@@ -1,6 +1,6 @@
 import type { OpenAPIHono, RouteConfig, RouteHandler } from "@hono/zod-openapi";
 import type { Schema } from "hono";
-import type { User } from "@/common/types/user.types";
+import type { User } from "../common/types/index.types";
 
 //biome-ignore lint/style/useConsistentTypeDefinitions : needed here
 export interface AppBindings {

@@ -1,6 +1,5 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
 import type { Schema } from "hono";
-import { logger } from "hono/logger";
 import { notFound, onError } from "stoker/middlewares";
 import { defaultHook } from "stoker/openapi";
 import type { AppBindings, AppOpenAPI } from "./types";
@@ -14,7 +13,6 @@ export function createRouter() {
 
 export default function createApp() {
 	const app = createRouter();
-	app.use(logger());
 	app.notFound(notFound);
 	app.onError(onError);
 	return app;

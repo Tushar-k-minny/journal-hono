@@ -1,15 +1,15 @@
 import { password } from "bun";
 import { sign, verify as verifyJWT } from "hono/jwt";
 import ms, { type StringValue } from "ms";
-import type { User as DbUser } from "@/common/database/schema";
+import type { User as DbUser } from "../../common/database/schema/users.schema";
 import type {
 	AuthCredentials,
 	AuthResponse,
 	RegisterUserInput,
 	UpdateProfileInput,
 	User,
-} from "@/common/types/index.types";
-import { env as authEnv } from "@/env";
+} from "../../common/types/index.types";
+import { env as authEnv } from "../../env";
 import { userRepository } from "./repositories.auth";
 
 const jwtSecret = authEnv.JWT_SECRET;

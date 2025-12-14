@@ -1,6 +1,6 @@
-import { authService } from "@auth/services.auth";
 import type { Context, Next } from "hono";
-import { fail } from "@/utils/response";
+import { authService } from "../../modules/auth/services.auth";
+import { fail } from "../../utils/response";
 
 export const requireAuth = async (c: Context, next: Next) => {
 	const header = c.req.header("authorization");

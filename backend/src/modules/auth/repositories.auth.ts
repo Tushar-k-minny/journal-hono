@@ -1,10 +1,10 @@
 import { and, eq } from "drizzle-orm";
-import db from "@/common/database";
-import { sessions, users } from "@/common/database/schema";
+import db from "../../common/database";
+import { sessions, users } from "../../common/database/schema";
 import type {
 	RegisterUserInput,
 	UpdateProfileInput,
-} from "@/common/types/index.types";
+} from "../../common/types/index.types";
 
 export const userRepository = {
 	async findByEmail(email: string) {

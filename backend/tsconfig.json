@@ -1,21 +1,40 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx",
-    "strictNullChecks": true,
-    "moduleResolution": "bundler",
-    "module": "Preserve",
-    "resolvePackageJsonImports": true,
-    "rootDir": "src",
-    "outDir": "dist",
-    "paths": {
-      "@auth/*": ["./src/modules/auth/*"],
-      "@analytics/*": ["./src/modules/analytics/*"],
-      "@journal/*": ["./src/modules/journal/*"],
-      "@/*": ["./src/*"]
-    }
-  },
-  "include": ["./src/**/*"],
-  "exclude": ["node_modules", "dist"]
+     "compilerOptions": {
+          "lib": [
+               "ESNext"
+          ],
+          "target": "ESNext",
+          "module": "ESNext",
+          "moduleDetection": "force",
+          "jsx": "react-jsx",
+          "jsxImportSource": "hono/jsx",
+          "allowJs": true,
+          // Bundler mode
+          "moduleResolution": "bundler",
+          "allowImportingTsExtensions": false,
+          "verbatimModuleSyntax": false,
+          "noEmit": false,
+          // Best practices
+          "strict": true,
+          "skipLibCheck": true,
+          "noFallthroughCasesInSwitch": true,
+          "noUncheckedIndexedAccess": true,
+          "noImplicitOverride": true,
+          // Some stricter flags (disabled by default)
+          "noUnusedLocals": false,
+          "noUnusedParameters": false,
+          "noPropertyAccessFromIndexSignature": false,
+          "types": [
+               "bun"
+          ],
+          "rootDir": "./src",
+          "outDir": "./dist",
+     },
+     "include": [
+          "./src/**/*"
+     ],
+     "exclude": [
+          "node_modules",
+          "dist"
+     ],
 }

@@ -6,14 +6,14 @@ import {
 	createErrorSchema,
 	createMessageObjectSchema,
 } from "stoker/openapi/schemas";
-import { requireAuth } from "@/common/middlewares/require-auth.middlewares";
+import { requireAuth } from "../../common/middlewares/require-auth.middlewares";
 import {
 	authCredentialsSchema,
 	authResponseSchema,
 	registerUserInput,
 	updateProfileInput,
 	userSchema,
-} from "@/common/types/index.types";
+} from "../../common/types/index.types";
 
 const tags = ["auth"];
 

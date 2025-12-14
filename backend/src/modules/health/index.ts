@@ -1,7 +1,7 @@
 import { createRoute } from "@hono/zod-openapi";
 import { jsonContent } from "stoker/openapi/helpers";
 import { createMessageObjectSchema } from "stoker/openapi/schemas";
-import createApp from "@/lib/create-app";
+import createApp from "../../lib/create-app";
 
 const healthRouter = createApp().openapi(
 	createRoute({
