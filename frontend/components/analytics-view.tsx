@@ -35,8 +35,10 @@ export function AnalyticsView() {
     useTagFrequency(days);
 
   const averageWords = wordCount?.length
-    ? wordCount.reduce((acc, curr) => acc + curr.averageWordCount, 0) /
-      wordCount.length
+    ? Math.round(
+        wordCount.reduce((acc, curr) => acc + curr.averageWordCount, 0) /
+          wordCount.length,
+      )
     : 0;
 
   return (
@@ -63,7 +65,7 @@ export function AnalyticsView() {
                   "brutal-border brutal-hover",
                   days === range.value
                     ? "brutal-shadow-sm bg-primary text-primary-foreground"
-                    : ""
+                    : "",
                 )}
                 key={range.value}
                 onClick={() => setDays(range.value)}
